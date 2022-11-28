@@ -37,7 +37,8 @@ func GetPrescriptionsApi(c *gin.Context) {
 	prescriptions, err := dataaccess.GetPrescriptions()
 
 	if err != nil {
-		log.Fatal(err)
+		c.String(http.StatusInternalServerError, "%v", err)
+        return
 	}
 
 	c.IndentedJSON(http.StatusOK, prescriptions)
